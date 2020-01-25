@@ -11,6 +11,8 @@ namespace P1.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
+        public DbSet<P1.Models.Project> Project { get; set; }
     }
 }
