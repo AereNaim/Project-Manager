@@ -1,0 +1,60 @@
+﻿@page
+@model P1.EditFeedback
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Feedback</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Feedback.ID" />
+            <div class="form-group">
+                <label asp-for="Feedback.Title" class="control-label"></label>
+                <input asp-for="Feedback.Title" class="form-control" />
+                <span asp-validation-for="Feedback.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feedback.Author" class="control-label"></label>
+                <input asp-for="Feedback.Author" class="form-control" />
+                <span asp-validation-for="Feedback.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feedback.Category" class="control-label"></label>
+                <input asp-for="Feedback.Category" class="form-control" />
+                <span asp-validation-for="Feedback.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feedback.Project" class="control-label"></label>
+                <input asp-for="Feedback.Project" class="form-control" />
+                <span asp-validation-for="Feedback.Project" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feedback.SubmiteDate" class="control-label"></label>
+                <input asp-for="Feedback.SubmiteDate" class="form-control" />
+                <span asp-validation-for="Feedback.SubmiteDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feedback.User" class="control-label"></label>
+                <input asp-for="Feedback.User" class="form-control" />
+                <span asp-validation-for="Feedback.User" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

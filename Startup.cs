@@ -32,10 +32,13 @@ namespace P1
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
-
-            services.AddDbContext<ProjectsContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ProjectsContext")));
+            services.AddRazorPages()
+                .AddRazorPagesOptions(confg =>
+                {
+                    confg.Conventions.AuthorizeFolder("/Projects");
+                    confg.Conventions.AuthorizeFolder("/Feedbacks");
+                    confg.Conventions.AuthorizeFolder("/BugTracker");
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
