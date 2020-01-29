@@ -10,8 +10,8 @@ using P1.Data;
 namespace P1.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200126010304_AddingBugsandFeeds")]
-    partial class AddingBugsandFeeds
+    [Migration("20200129221153_CorrectingDB")]
+    partial class CorrectingDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -246,8 +246,8 @@ namespace P1.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("User")
-                        .HasColumnType("int");
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -276,8 +276,8 @@ namespace P1.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("User")
-                        .HasColumnType("int");
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -312,8 +312,8 @@ namespace P1.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("User")
-                        .HasColumnType("int");
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
