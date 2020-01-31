@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,10 +21,11 @@ namespace P1
         }
 
         public IList<Bug> Bug { get;set; }
+        public IList<Project> Project { get; set; }
 
         public async Task OnGetAsync()
         {
-            Bug = await _context.Bug.ToListAsync();
+            Bug = await _context.Bug.Where(q => q.User == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
         }
     }
 }

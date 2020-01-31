@@ -26,23 +26,27 @@
             </div>
             <div class="form-group">
                 <label asp-for="Feedback.Category" class="control-label"></label>
-                <input asp-for="Feedback.Category" class="form-control" />
+                <select asp-for="Feedback.Category" class="form-control">
+                    <option value="Functionality">Functionality</option>
+                    <option value="Minor Security">Minor Security</option>
+                    <option value="Major Security">Major Security</option>
+                </select>
                 <span asp-validation-for="Feedback.Category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Feedback.Project" class="control-label"></label>
-                <input asp-for="Feedback.Project" class="form-control" />
+                <select asp-for="Feedback.Project" class="form-control">
+                    @foreach (var item in Model.Project)
+                    {
+                    <option value="@item.Title">@item.Title</option>
+                    }
+                </select>
                 <span asp-validation-for="Feedback.Project" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Feedback.SubmiteDate" class="control-label"></label>
                 <input asp-for="Feedback.SubmiteDate" class="form-control" />
                 <span asp-validation-for="Feedback.SubmiteDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Feedback.User" class="control-label"></label>
-                <input asp-for="Feedback.User" class="form-control" />
-                <span asp-validation-for="Feedback.User" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

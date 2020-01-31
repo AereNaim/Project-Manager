@@ -20,7 +20,7 @@
                 <span asp-validation-for="Project.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Project.Desc" class="control-label"></label>
+                <label asp-for="Project.Desc" class="control-label">Description</label>
                 <input asp-for="Project.Desc" class="form-control" />
                 <span asp-validation-for="Project.Desc" class="text-danger"></span>
             </div>
@@ -45,13 +45,12 @@
                 <span asp-validation-for="Project.Deadline" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Project.User" class="control-label"></label>
-                <input asp-for="Project.User" class="form-control" />
-                <span asp-validation-for="Project.User" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Project.Status" class="control-label"></label>
-                <input asp-for="Project.Status" class="form-control" />
+                <select asp-for="Project.Status" class="form-control">
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
                 <span asp-validation-for="Project.Status" class="text-danger"></span>
             </div>
             <div class="form-group">

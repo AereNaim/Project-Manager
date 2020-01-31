@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -21,6 +22,7 @@ namespace P1
 
         [BindProperty]
         public Feedback Feedback { get; set; }
+        public IList<Project> Project { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,7 +33,7 @@ namespace P1
 
             Feedback = await _context.Feedback.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Feedback == null)
+            if (Feedback == null || !(Feedback.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return NotFound();
             }
@@ -47,7 +49,7 @@ namespace P1
 
             Feedback = await _context.Feedback.FindAsync(id);
 
-            if (Feedback != null)
+            if (Feedback != null && (Feedback.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 _context.Feedback.Remove(Feedback);
                 await _context.SaveChangesAsync();

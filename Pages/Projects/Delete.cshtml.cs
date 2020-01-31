@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -31,7 +32,7 @@ namespace P1
 
             Project = await _context.Project.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Project == null)
+            if (Project == null || !(Project.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return NotFound();
             }
@@ -47,7 +48,7 @@ namespace P1
 
             Project = await _context.Project.FindAsync(id);
 
-            if (Project != null)
+            if (Project != null && (Project.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 _context.Project.Remove(Project);
                 await _context.SaveChangesAsync();

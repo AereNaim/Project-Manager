@@ -30,7 +30,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" asp-area="" asp-page="/Index">
+                <a class="nav-link" asp-area="" asp-page="/Dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -124,40 +124,6 @@
         </ul>
         <!-- End of Sidebar -->
 
-        <!-- Old Header -->
-        <!--
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">P1</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Projects/index">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Feedbacks/index">Feedbacks</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/BugTracker/index">Bug Tracking</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-        -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div class="content">
@@ -355,15 +321,16 @@
                 <!-- End of Footer -->
             </div>
         </div>
-        <!-- End of Page Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
-        <script src="~/js/sb-admin-2.min.js" asp-append-version="true"></script>
-        <script src="~/lib/chart.js/Chart.min.js"></script>
-        <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
-        <script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
+<script src="~/js/sb-admin-2.min.js" asp-append-version="true"></script>
+<script src="~/lib/chart.js/Chart.min.js"></script>
+<script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+<script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
 
 
         @RenderSection("Scripts", required: false)

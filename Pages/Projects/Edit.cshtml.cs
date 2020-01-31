@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -32,7 +33,7 @@ namespace P1
 
             Project = await _context.Project.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Project == null)
+            if (Project == null || !(Project.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return NotFound();
             }
@@ -49,9 +50,11 @@ namespace P1
             }
 
             _context.Attach(Project).State = EntityState.Modified;
-
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            
             try
             {
+                Project.User = userId;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

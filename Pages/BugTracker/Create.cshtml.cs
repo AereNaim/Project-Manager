@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,9 +19,10 @@ namespace P1
         {
             _context = context;
         }
-
+        public IList<Project> Project { get; set; }
         public IActionResult OnGet()
         {
+            Project = _context.Project.Where(q => q.User == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             return Page();
         }
 
@@ -35,7 +37,7 @@ namespace P1
             {
                 return Page();
             }
-
+            Bug.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
             _context.Bug.Add(Bug);
             await _context.SaveChangesAsync();
 

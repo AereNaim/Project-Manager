@@ -35,9 +35,9 @@ namespace P1
             services.AddRazorPages()
                 .AddRazorPagesOptions(confg =>
                 {
-                    confg.Conventions.AuthorizeFolder("/Projects");
-                    confg.Conventions.AuthorizeFolder("/Feedbacks");
-                    confg.Conventions.AuthorizeFolder("/BugTracker");
+                    confg.Conventions.AuthorizeFolder("/Projects/");
+                    confg.Conventions.AuthorizeFolder("/Feedbacks/");
+                    confg.Conventions.AuthorizeFolder("/BugTracker/");
                 });
         }
 

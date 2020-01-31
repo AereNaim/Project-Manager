@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,6 +20,7 @@ namespace P1
         {
             _context = context;
         }
+        public IList<Project> Project { get; set; }
 
         [BindProperty]
         public Bug Bug { get; set; }
@@ -32,10 +34,11 @@ namespace P1
 
             Bug = await _context.Bug.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Bug == null)
+            if (Bug == null || !(Bug.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return NotFound();
             }
+            Project = await _context.Project.Where(q => q.User == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
             return Page();
         }
 
@@ -52,6 +55,7 @@ namespace P1
 
             try
             {
+                Bug.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

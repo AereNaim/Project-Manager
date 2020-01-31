@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,13 +14,16 @@ namespace P1
 {
     public class EditFeedback : PageModel
     {
+        
         private readonly P1.Data.ApplicationDbContext _context;
-
+        
         public EditFeedback(P1.Data.ApplicationDbContext context)
         {
             _context = context;
         }
+        public IList<Project> Project { get; set; }
 
+        
         [BindProperty]
         public Feedback Feedback { get; set; }
 
@@ -32,13 +36,14 @@ namespace P1
 
             Feedback = await _context.Feedback.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Feedback == null)
+            if (Feedback == null || !(Feedback.User == User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return NotFound();
             }
+            Project = await _context.Project.Where(q => q.User == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
+
             return Page();
         }
-
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -52,6 +57,7 @@ namespace P1
 
             try
             {
+                Feedback.User = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -73,5 +79,7 @@ namespace P1
         {
             return _context.Feedback.Any(e => e.ID == id);
         }
+
+        
     }
 }
