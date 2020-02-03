@@ -27,11 +27,16 @@ namespace P1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Database Connection
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            // Adding Microsoft Identity Service
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // Adding Razor Pages Service and Authoritzation of Certain Folders for Authenticated users only
             services.AddRazorPages()
                 .AddRazorPagesOptions(confg =>
                 {
@@ -61,9 +66,13 @@ namespace P1
 
             app.UseRouting();
 
+
+            // Using Auths
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+            // Razor Pages as the only end points of routing we need
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

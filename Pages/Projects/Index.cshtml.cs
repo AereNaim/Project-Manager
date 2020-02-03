@@ -24,6 +24,8 @@ namespace P1
 
         public async Task OnGetAsync()
         {
+            // userID is the current logged in user's id from identity service
+            // And Project is the projects list retrieved from the database where project user string equals userId
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Project = await _context.Project.Where(q => q.User == userId).ToListAsync();
         }
